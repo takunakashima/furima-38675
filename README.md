@@ -11,7 +11,7 @@
 | last_name          | string | null: false               |
 | first_name_kana    | string | null: false               |
 | last_name_kana     | string | null: false               |
-| birthday           | data   | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 - has_many :items
@@ -23,11 +23,11 @@
 | ------------------ | ------- | --------------------------------|
 | item_name          | string  | null: false                     |
 | explain            | text    | null: false                     |
-| category_id        | string  | null: false                     |
-| status_id          | string  | null: false                     |
-| delivery_charge_id | string  | null: false                     |
-| area_id            | string  | null: false                     |
-| days_required_id   | string  | null: false                     |
+| category_id        | integer | null: false                     |
+| status_id          | integer | null: false                     |
+| delivery_charge_id | integer | null: false                     |
+| area_id            | integer | null: false                     |
+| days_required_id   | integer | null: false                     |
 | price              | integer | null: false                     |
 | user               |reference| null: false , foreign_key: true |
 
@@ -53,9 +53,9 @@
 | Column             | Type    | Options                        |
 | ------------------ | ------- | -------------------------------|
 | post_code          | string  | null: false                    |
-| area_id            | string  | null: false                    |
+| area_id            | integer | null: false                    |
 | municipalities     | string  | null: false                    |
-| address            | integer | null: false                    |
+| address            | string  | null: false                    |
 | building_name      | string  |                                |
 | phone_number       | string  | null: false                    |
 | order              |reference| null: false                    |
