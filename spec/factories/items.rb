@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :item do
+    association :user
+
     after(:build) do |item|
       item.image.attach(io: File.open('app/assets/images/IMG_0803.JPG'),filename: 'IMG_0803.JPG')
     end 
@@ -12,6 +14,7 @@ FactoryBot.define do
     area_id            {2}
     days_required_id   {2}
     price              {300}
+
 
   end
 end

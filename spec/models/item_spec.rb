@@ -9,9 +9,7 @@ RSpec.describe Item, type: :model do
 
     context '商品出品できるとき' do
       it '商品画像〜販売価格が存在すれば出品できる' do
-        @item.image = fixture_file_upload('app/assets/images/IMG_0803.JPG')
         expect(@item).to be_valid
-        fixture_file_upload('app/assets/images/IMG_0803.JPG')
       end
     end
   
@@ -67,7 +65,7 @@ RSpec.describe Item, type: :model do
       it '販売価格が空では出品できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
 
       it '商品名が40文字以上だと出品できない' do
@@ -99,6 +97,43 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
+
+      it 'カテゴリーに「---」が選択されている場合は出品できない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+
+      it '商品の状態に「---」が選択されている場合は出品できない' do
+        @item.status_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status can't be blank")
+      end
+
+      it '配送料の負担に「---」が選択されている場合は出品できない' do
+        @item.delivery_charge_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
+      end
+
+      it '発送元の地域に「---」が選択されている場合は出品できない' do
+        @item.area_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area can't be blank")
+      end
+
+      it '発送までの日数に「---」が選択されている場合は出品できない' do
+        @item.days_required_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Days required can't be blank")
+      end
+
+      it 'userが結びついていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
+      end
+      
     end
   end
 end
