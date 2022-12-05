@@ -6,11 +6,7 @@ class ItemsController < ApplicationController
   
   def new
     @items = Item.new 
-    @categories = Category.all
-    @statuses = Status.all
-    @delivery_chargies = Delivery_charge.all
-    @areas = Area.all
-    @days_requireds = Days_required.all
+    
 
   end
 

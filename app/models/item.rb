@@ -12,8 +12,7 @@ class Item < ApplicationRecord
   validates :item_name, presence: true, length: { maximum: 40 }
   validates :explain, presence: true,     length: { maximum: 1000 }
   
-  #  validates :price, presence: true, numericality:{only_integer: true,greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}、format:{ with: /\A[0-9]+\z/ }
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, only_integer: true }
+  validates :price, presence: true, numericality:{only_integer: true,greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}、format:{ with: /\A[0-9]+\z/ }
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :status_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :delivery_charge_id, numericality: { other_than: 1 , message: "can't be blank"}
@@ -21,8 +20,5 @@ class Item < ApplicationRecord
   validates :days_required_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :image, presence: true, unless: :was_attached?
 
-   def was_attached?
-    self.image.attached?
-   end
-
+   
   end
