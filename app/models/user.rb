@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :last_name_kana, presence: true, format: { with: KATAKANA_REGEXP, message:'is invalid. Input full-width characters' }
   validates :birthday, presence: true
        
-  # has_many :items
+   has_many :items
   # has_many :orders
   
 end
