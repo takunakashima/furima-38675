@@ -1,14 +1,13 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :contributor_confirmation, only: [:edit, :update]
-  before_action :set_item, except: [:new, :create]
+  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order(id: :DESC)
   end
   
   def new
-    @items = Item.new    
+    @items = Item.new
   end
 
   def create
@@ -25,17 +24,22 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @items = Item.find(params[:id])
-
   end
 
   def update
-    @items = Item.find(params[:id])
-    if @items.update(item_params)
-      redirect_to item_path(@items)
+    if @item.update(item_params)
+      redirect_to item_path(@item)
     else
       render :edit
     end
+  end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end  
   end
 
   private
@@ -44,11 +48,9 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    @items = Item.find(params[:id])
-    redirect_to root_path unless current_user == @items.user
+    @item = Item.find(params[:id])
+    redirect_to root_path unless current_user == @item.user
   end
 
-  def set_item
-    @items = Item.find(params[:id])
-  end
+  
 end
