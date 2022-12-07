@@ -27,8 +27,8 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @items.update(item_params)
-      redirect_to item_path(@items)
+    if @item.update(item_params)
+      redirect_to item_path(@item)
     else
       render :edit
     end
@@ -39,7 +39,8 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       redirect_to root_path
-    end  end
+    end  
+  end
 
   private
   def item_params
@@ -47,8 +48,8 @@ class ItemsController < ApplicationController
   end
 
   def contributor_confirmation
-    @items = Item.find(params[:id])
-    redirect_to root_path unless current_user == @items.user
+    @item = Item.find(params[:id])
+    redirect_to root_path unless current_user == @item.user
   end
 
   
