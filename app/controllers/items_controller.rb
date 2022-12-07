@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   end
   
   def new
-    @items = Item.new    
+    @items = Item.new
   end
 
   def create
@@ -24,8 +24,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @items = Item.find(params[:id])
-
   end
 
   def update
@@ -37,7 +35,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @items.destroy
+    if @item.destroy
       redirect_to root_path
     else
       redirect_to root_path
