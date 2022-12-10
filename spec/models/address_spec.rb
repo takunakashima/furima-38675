@@ -8,7 +8,7 @@ RSpec.describe OrderAddress, type: :model do
   describe '商品購入機能' do
 
     context '商品購入できるとき' do
-      it '（建物名除く）郵便番号〜電話番号が存在すれば出品できる' do
+      it '（建物名除く）空欄がなければ出品できる' do
         expect(@address).to be_valid
       end
     end
@@ -17,23 +17,11 @@ RSpec.describe OrderAddress, type: :model do
 
       # <%〜がからでは出品出来ない%>
 
-      # it 'クレジットカード情報が空では出品できない' do
-      #   @item.image = nil
-      #   @item.valid?
-      #   expect(@item.errors.full_messages).to include("Image can't be blank")
-      # end
-
-      # it '有効期限が空では出品できない' do
-      #   @item.item_name = ''
-      #   @item.valid?
-      #   expect(@item.errors.full_messages).to include("Item name can't be blank")
-      # end
-
-      # it 'セキュリティコードが空では出品できない' do
-      #   @item.explain = ''
-      #   @item.valid?
-      #   expect(@item.errors.full_messages).to include(g"Explain can't be blank")
-      # end
+      it "tokenが空では登録できない" do
+        @address.token = nil
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Token can't be blank")
+      end
 
       it '郵便番号が空では購入できない' do
         @address.post_code = nil
@@ -103,15 +91,6 @@ RSpec.describe OrderAddress, type: :model do
         expect(@address.errors.full_messages).to include("Phone number is invalid")
       end
       # <%正規表現条件%>
-
-      # <%association%>
-      # it 'userが結びついていなければ出品できない' do
-      #   @item.user = nil
-      #   @item.valid?
-      #   expect(@item.errors.full_messages).to include('User must exist')
-      # end
-      # <%association%>
-
       
     end
   end
