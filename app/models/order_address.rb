@@ -9,9 +9,10 @@ class OrderAddress
     validates :area_id, numericality: { other_than: 1 , message: "can't be blank"}
     validates :municipalities
     validates :address
-    validates :phone_number, format: { with: /\A\d{11}\z/ }
+    validates :phone_number, format: { with: /\A\d{10}$|^\d{11}\z/ }
     validates :token, presence: true
-
+    validates :user_id, presence: true
+    validates :item_id, presence: true
    end
 
 

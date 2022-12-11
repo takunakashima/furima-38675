@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   validates :item_name, presence: true, length: { maximum: 40 }
   validates :explain, presence: true,     length: { maximum: 1000 }
   
-  # validates :price, presence: true, numericality: {only_integer: true,greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  validates :price, presence: true, numericality: {only_integer: true,greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :status_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :delivery_charge_id, numericality: { other_than: 1 , message: "can't be blank"}

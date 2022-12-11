@@ -15,6 +15,5 @@ FactoryBot.define do
     days_required_id   {2}
     price              {300}
 
-
   end
 end

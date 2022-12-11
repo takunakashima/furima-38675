@@ -8,7 +8,11 @@ RSpec.describe OrderAddress, type: :model do
   describe '商品購入機能' do
 
     context '商品購入できるとき' do
-      it '（建物名除く）空欄がなければ出品できる' do
+      it '空欄がなければ購入できる' do
+        expect(@address).to be_valid
+      end
+
+      it '建物名が空でも購入できる' do
         expect(@address).to be_valid
       end
     end
@@ -61,25 +65,19 @@ RSpec.describe OrderAddress, type: :model do
         expect(@address.errors.full_messages).to include("Post code is invalid")
       end
 
-      # it '郵便番号が半角入力でないと購入できない' do
-      #   @address.post_code = '１２３４５６７'
-      #   @address.valid?
-      #   expect(@address.errors.full_messages).to include("Post code is invalid)")
-      # end
-
       it '都道府県に「---」が選択されている場合は購入出来ない' do
         @address.area_id = '1' 
         @address.valid?
         expect(@address.errors.full_messages).to include("Area can't be blank")
       end
 
-      it '電話番号が11桁以上だと購入できない' do
+      it '電話番号が12桁以上だと購入できない' do
         @address.phone_number ='123456789012'
         @address.valid?
         expect(@address.errors.full_messages).to include("Phone number is invalid")
       end
 
-      it '電話番号が10桁以下だと購入できない' do
+      it '電話番号が9桁以下だと購入できない' do
         @address.phone_number = '123456789'
         @address.valid?
         expect(@address.errors.full_messages).to include("Phone number is invalid")
@@ -92,6 +90,18 @@ RSpec.describe OrderAddress, type: :model do
       end
       # <%正規表現条件%>
       
+      it 'user_idが結びついていなければ購入できない' do
+        @address.user_id = nil
+        @address.valid?
+        expect(@address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが結びついていなければ購入できない' do
+        @address.item_id = nil
+        @address.valid?
+        expect(@address.errors.full_messages).to include("Item can't be blank")
+      end
+
     end
   end
 end
