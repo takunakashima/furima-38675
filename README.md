@@ -37,7 +37,6 @@
 
 
 ##　ordersテーブル
-
 | Column             | Type    | Options                        |
 | ------------------ | ------- | -------------------------------|
 | user               |reference| null: false ,foreign_key: true |

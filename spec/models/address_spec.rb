@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @address = FactoryBot.build(:order_address, user_id: user.id)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
   end
 
   describe '商品購入機能' do
@@ -35,31 +37,34 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it '都道府県が空では購入できない' do
-        @address.area_id = ''
+        @address.area_id = nil
         @address.valid?
         expect(@address.errors.full_messages).to include("Area can't be blank")
       end
 
       it '市区町村が空では購入できない' do
-        @address.municipalities = ''
+        @address.municipalities = nil
         @address.valid?
         expect(@address.errors.full_messages).to include("Municipalities can't be blank")
       end
 
       it '番地が空では購入できない' do
-        @address.address = ''
+        @address.address = nil
         @address.valid?
         expect(@address.errors.full_messages).to include("Address can't be blank")
       end
 
       it '電話番号が空では購入できない' do
-        @address.phone_number = ''
+        @address.phone_number = nil
         @address.valid?
         expect(@address.errors.full_messages).to include("Phone number can't be blank")
       end
+
       # <%〜が空では出品出来ない%>
 
+
       # <%正規表現条件%>
+
       it '郵便番号は「-」を含まないと購入できない' do
         @address.post_code = '1234567'
         @address.valid?
@@ -89,6 +94,7 @@ RSpec.describe OrderAddress, type: :model do
         @address.valid?
         expect(@address.errors.full_messages).to include("Phone number is invalid")
       end
+
       # <%正規表現条件%>
       
       it 'user_idが結びついていなければ購入できない' do
