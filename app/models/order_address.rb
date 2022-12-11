@@ -10,9 +10,9 @@ class OrderAddress
     validates :municipalities
     validates :address
     validates :phone_number, format: { with: /\A\d{10}$|^\d{11}\z/ }
-    validates :token, presence: true
-    validates :user_id, presence: true
-    validates :item_id, presence: true
+    validates :token
+    validates :user_id
+    validates :item_id
    end
 
 

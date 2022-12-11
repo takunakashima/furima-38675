@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-   before_action :authenticate_user!, except: [:index, :show]
-   before_action :contributor_confirmation, only: [:index, :create]
+   before_action :authenticate_user!, only: [:index]
    before_action :set_order, only: [:index, :create]
+   before_action :contributor_confirmation, only: [:index, :create]
 
   def index
     @order_address = OrderAddress.new
@@ -33,10 +33,7 @@ class OrdersController < ApplicationController
   end
 
    def contributor_confirmation
-     @item = Item.find(params[:item_id])
     unless current_user == @item.user
-      redirect_to item_orders_path
-    else
       redirect_to root_path
     end
     
