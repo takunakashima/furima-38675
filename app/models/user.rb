@@ -5,14 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
         
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates :password, format: { with: VALID_PASSWORD_REGEX , message:'is invalid. Include both letters and numbers'}
+  validates :password, format: { with: VALID_PASSWORD_REGEX}
   validates :nickname, presence: true
   validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
   validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/}
   KATAKANA_REGEXP = /\A[\p{katakana}\u{30fc}]+\z/
-  validates :first_name_kana, presence: true, format: { with: KATAKANA_REGEXP, message:'is invalid. Input full-width characters' }
+  validates :first_name_kana, presence: true, format: { with: KATAKANA_REGEXP }
   KATAKANA_REGEXP = /\A[\p{katakana}\u{30fc}]+\z/
-  validates :last_name_kana, presence: true, format: { with: KATAKANA_REGEXP, message:'is invalid. Input full-width characters' }
+  validates :last_name_kana, presence: true, format: { with: KATAKANA_REGEXP }
   validates :birthday, presence: true
        
    has_many :items
