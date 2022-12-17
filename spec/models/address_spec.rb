@@ -63,7 +63,6 @@ RSpec.describe OrderAddress, type: :model do
 
       # <%〜が空では出品出来ない%>
 
-
       # <%正規表現条件%>
 
       it '郵便番号は「-」を含まないと購入できない' do
