@@ -5,7 +5,7 @@ RSpec.describe OrderAddress, type: :model do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
     @address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
-    # sleep 0.3 # 0.3秒待機
+     #sleep 0.3 # 0.3秒待機
   end
 
   describe '商品購入機能' do
@@ -27,6 +27,7 @@ RSpec.describe OrderAddress, type: :model do
 
       it "tokenが空では登録できない" do
         @address.token = nil
+        
         @address.valid?
         expect(@address.errors.full_messages).to include("クレジットカード情報を入力してください")
       end
