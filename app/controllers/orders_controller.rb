@@ -32,12 +32,12 @@ class OrdersController < ApplicationController
     )
   end
 
-   def contributor_confirmation
-    if current_user == @item.user ||  @item.order.present?
-      redirect_to root_path
-    end
+  #  def contributor_confirmation
+  #   if current_user == @item.user ||  @item.order.present?
+  #     redirect_to root_path
+  #   end
     
-   end
+  #  end
 
    def set_order
     @item = Item.find(params[:item_id])
